@@ -1,0 +1,113 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:w="http://www.soddik.com/soapservice"
+           targetNamespace="http://www.soddik.com/soapservice"
+           xmlns="http://www.soddik.com/soapservice"
+           elementFormDefault="qualified">
+
+    <xs:element name="getEmployeeByLoginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getEmployeeByLoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" type="w:employeeDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="employeeDto">
+        <xs:sequence>
+            <xs:element type="xs:string" name="name"/>
+            <xs:element type="xs:string" name="login"/>
+            <xs:element type="xs:string" name="password"/>
+            <xs:element type="w:roleDto" name="roles" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="roleDto">
+        <xs:sequence>
+            <xs:element type="xs:long" name="id"/>
+            <xs:element type="xs:string" name="name"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getAllEmployeesRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="getAllEmployeesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employees" type="w:simpleEmployeeDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="simpleEmployeeDto">
+        <xs:sequence>
+            <xs:element type="xs:string" name="name"/>
+            <xs:element type="xs:string" name="login"/>
+            <xs:element type="xs:string" name="password"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="addEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="login" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:element name="role" type="w:roleDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="w:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="login" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:element name="role" type="w:roleDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="w:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteEmployeeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="login" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteEmployeeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="w:response"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element type="xs:boolean" name="success"/>
+            <xs:element type="xs:string" name="error"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
