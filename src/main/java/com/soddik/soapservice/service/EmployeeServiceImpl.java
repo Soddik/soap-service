@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeRepository.save(employee);
             return true;
         } else {
-            throw new EmployeeValidationException("Validation failed, cause: " + validationResult);
+            throw new EmployeeValidationException("Validation failed, cause: " + validationResult.getValue());
         }
     }
 
@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeRepository.save(employee);
             return true;
         } else {
-            throw new EmployeeValidationException("Validation failed, cause: " + validationResult);
+            throw new EmployeeValidationException("Validation failed, cause: " + validationResult.getValue());
         }
     }
 

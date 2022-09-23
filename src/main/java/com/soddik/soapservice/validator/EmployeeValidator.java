@@ -30,9 +30,19 @@ public interface EmployeeValidator extends Function<Employee, ValidationResult> 
     }
 
     enum ValidationResult {
-        SUCCESS,
-        INVALID_NAME,
-        INVALID_LOGIN,
-        INVALID_PASSWORD
+        SUCCESS("success"),
+        INVALID_NAME("Empty \"name\" attribute."),
+        INVALID_LOGIN("Empty \"login\" attribute."),
+        INVALID_PASSWORD("Password must contain at least 1: capital letter and number.");
+
+        private final String value;
+
+        ValidationResult(String value) {
+            this.value = value;
+        }
+
+        public String getValue(){
+            return value;
+        }
     }
 }
