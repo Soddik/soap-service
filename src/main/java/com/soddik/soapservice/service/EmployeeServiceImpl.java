@@ -38,30 +38,36 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeAlreadyExistsException(String.format("Employee with login:\"%s\" already exists!", employee.getLogin()));
         }
 
-        ValidationResult validationResult = isNameValid()
-                .and(isLoginValid())
-                .and(isPasswordValid())
-                .apply(employee);
+        ValidationResult validationResult = getValidationResult(employee);
 
-        if (validationResult.equals(SUCCESS)) {
-            employeeRepository.save(employee);
-            return true;
-        } else {
-            throw new EmployeeValidationException("Validation failed, cause: " + validationResult.getValue());
-        }
+        return validateAndSave(validationResult, employee);
     }
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        if (!employeeRepository.existsById(employee.getLogin())) {
-            throw new EmployeeNotFoundException(String.format("Employee with login: \"%s\" not found!", employee.getLogin()));
-        }
+        checkExistenceById(employee.getLogin());
 
-        ValidationResult validationResult = isNameValid()
+        ValidationResult validationResult = getValidationResult(employee);
+
+        return validateAndSave(validationResult, employee);
+    }
+
+    @Override
+    public boolean deleteEmployee(String login) {
+        checkExistenceById(login);
+
+        employeeRepository.deleteById(login);
+        return !employeeRepository.existsById(login);
+    }
+
+    private ValidationResult getValidationResult(Employee employee) {
+        return isNameValid()
                 .and(isLoginValid())
                 .and(isPasswordValid())
                 .apply(employee);
+    }
 
+    private boolean validateAndSave(ValidationResult validationResult, Employee employee) {
         if (validationResult.equals(SUCCESS)) {
             employeeRepository.save(employee);
             return true;
@@ -70,14 +76,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    @Override
-    public boolean deleteEmployee(String login) {
-        if (!employeeRepository.existsById(login)) {
-            throw new EmployeeNotFoundException(String.format("Employee with login: \"%s\" not found!", login));
+    private void checkExistenceById(String id) {
+        if (!employeeRepository.existsById(id)) {
+            throw new EmployeeNotFoundException(String.format("Employee with login: \"%s\" not found!", id));
         }
-
-        employeeRepository.deleteById(login);
-        return !employeeRepository.existsById(login);
-
     }
 }

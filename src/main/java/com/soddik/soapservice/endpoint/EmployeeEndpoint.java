@@ -35,7 +35,6 @@ public class EmployeeEndpoint {
         return response;
     }
 
-    //works
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addEmployeeRequest")
     @ResponsePayload
     public AddEmployeeResponse addEmployeeRequest(@RequestPayload AddEmployeeRequest request) {
@@ -51,7 +50,6 @@ public class EmployeeEndpoint {
         return addEmployeeResponse;
     }
 
-    //works
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateEmployeeRequest")
     @ResponsePayload
     public UpdateEmployeeResponse updateEmployeeRequest(@RequestPayload UpdateEmployeeRequest request) {
@@ -67,7 +65,6 @@ public class EmployeeEndpoint {
         return updateEmployeeResponse;
     }
 
-    //works
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteEmployeeRequest")
     @ResponsePayload
     public DeleteEmployeeResponse deleteEmployeeRequest(@RequestPayload DeleteEmployeeRequest request) {
