@@ -7,7 +7,7 @@ Simple employee(with role) CRUD soap service
 - PostgreSQL
 - SoapUI/Postman
 ## Getting started
-1. Clone project: `https://github.com/AntiStC/store_app.git`
+1. Clone project: `https://github.com/Soddik/soap-service.git`
 2. Install PostgreSQL 
 3. Created PostgreSQL DB `employee_db` (all tables are generated automatically with Spring Data JPA)
 4. Build with `mvn clean install` from root project folder via CLI
