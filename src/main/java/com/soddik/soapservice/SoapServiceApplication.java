@@ -18,17 +18,17 @@ public class SoapServiceApplication {
     public CommandLineRunner rolesDemo(EmployeeRoleService roleService) {
         return args -> {
             EmployeeRole admin = new EmployeeRole();
-            admin.setName("Админ");
+            admin.setName("Admin");
 
             EmployeeRole operator = new EmployeeRole();
-            operator.setName("Оператор");
+            operator.setName("Operator");
 
-            EmployeeRole analit = new EmployeeRole();
-            analit.setName("Аналитик");
+            EmployeeRole analyst = new EmployeeRole();
+            analyst.setName("Analyst");
 
             roleService.addRole(admin);
             roleService.addRole(operator);
-            roleService.addRole(analit);
+            roleService.addRole(analyst);
         };
     }
 }
